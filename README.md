@@ -4,25 +4,31 @@
 - Login 
     - User enter details - Username and password
         - if user's name is match with existing database then return the user to user's homepage. 
-        - if user's name is present in the database then return the user an error message. No such user exixts.
+        - if user's name is not present in the database then return the user an error message. No such user exixts.
 - Sign Up
     - User enter details - Username and password and hit Signup
         - check if user's name is present in the data then return an error message, user already exists.
-        - Otherwise return user details saved into the database and save the user'name into the localStorage and move the user to their homepage.
+        - Otherwise saved the data into the database and save the user'name into the localStorage and move the user to their homepage.
 
-## Creating users table
 
-    - id (serial) // auto_incr
+## Creating users table for storing user password and username
+
+    - id (serial) PK // auto_incr
     - name varchar(30) NOT NULL // sole identifier
+    - password int NOT NULL 
+
+## Creating npmStore for storing the user's data 
+    - id (serial) PK //auto_incr
+    - uid INT NOT NULL
     - fav_package (varchar50) NOT NULL
     - comments (varchar100) NOT NULL
-    - PRIMARY KEY (id)
 
-## saving the user name in the local storage
+## saving the user name in the local storage when user saving into the database
 localStorage.setItem("key", value)
 
 ## checking the user is present or not (authenticating the user)
 if(localStorage.getItem("key", value)){}
+else{error}
 
 ## When user click on signout then remove the user value from the localstorage
 localStorage.removeItem("key");
