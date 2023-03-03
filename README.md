@@ -8,7 +8,7 @@
 - Sign Up
     - User enter details - Username and password and hit Signup
         - check if user's name is present in the data then return an error message, user already exists.
-        - Otherwise saved the data into the database and save the user'name into the localStorage and move the user to their homepage.
+        - Otherwise saved the data into the database and save the user's id and name into the localStorage and move the user to their homepage.
 
 
 ## Creating users table for storing user password and username
@@ -40,16 +40,16 @@
 `if(localStorage.getItem("key", value)){}`
 `else{error}`
 
-## When user click on signout then remove the user id from the localstorage
+## When the user click on signout button then remove the user id from the localstorage
 `localStorage.removeItem("key");`
 
 ## When user want to login then search the user's name from the database 
- - if found then save the user's name into the localstorage 
-    - select name from user where name="joe" 
+ - if found then save the user's name and id into the localstorage 
+    - `select name from user where name="joe"` 
  - If not found ask user to fill the form, say new user.
 
 ## if user found then go user's data and display the data
-`select * from user where name="joe";`
+`select * from user where id="1";`
 
 
 ## Inserting data into the user table
@@ -61,9 +61,16 @@
 `SELECT * from user where id="1";`
 
 # Api creation
+## API Login
+    - https://localhost:5000/login
+
+## API Register
+    - https://localhost:5000/register
+
+## API 
+
 ## Get all favorite by user
 `if(userId) {`
     `https://localhost:5000/npm/1`
 `}else{}`
 
-## 
