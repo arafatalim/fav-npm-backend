@@ -33,15 +33,15 @@
 
 
 
-## saving the user name in the local storage when user saving into the database
-localStorage.setItem("key", value)
+## saving the user id in the local storage when user saving into the database
+`localStorage.setItem("key", value)`
 
-## checking the user is present or not (authenticating the user)
-if(localStorage.getItem("key", value)){}
-else{error}
+## checking the user od is present in local storage or not (authenticating the user)
+`if(localStorage.getItem("key", value)){}`
+`else{error}`
 
-## When user click on signout then remove the user value from the localstorage
-localStorage.removeItem("key");
+## When user click on signout then remove the user id from the localstorage
+`localStorage.removeItem("key");`
 
 ## When user want to login then search the user's name from the database 
  - if found then save the user's name into the localstorage 
@@ -49,22 +49,21 @@ localStorage.removeItem("key");
  - If not found ask user to fill the form, say new user.
 
 ## if user found then go user's data and display the data
-select * from user where name="joe";
+`select * from user where name="joe";`
 
 
 ## Inserting data into the user table
 
-INSERT into users(name, fav_package, comments)
-VALUES('Joe', "react", 'What is the butterfly effect?');
+`INSERT into users(name, fav_package, comments) VALUES('Joe', "react", 'What is the butterfly effect?');`
 
 ## Retrieving All Data by name
 
-SELECT * from user where name="joe";
+`SELECT * from user where id="1";`
 
 # Api creation
 ## Get all favorite by user
-if(userId) {
-    https://localhost:5000/api/1
-}else{}
+`if(userId) {`
+    `https://localhost:5000/npm/1`
+`}else{}`
 
-##  
+## 
