@@ -23,6 +23,16 @@
     - fav_package (varchar50) NOT NULL
     - comments (varchar100) NOT NULL
 
+## Prerequistic
+ - sequelize
+ - pg
+ - pg-hstore
+ - postgresql
+ - expressJS
+ - bcrypt
+
+
+
 ## saving the user name in the local storage when user saving into the database
 localStorage.setItem("key", value)
 
@@ -52,5 +62,9 @@ VALUES('Joe', "react", 'What is the butterfly effect?');
 SELECT * from user where name="joe";
 
 # Api creation
-## Get all favorite by 
-https://localhost:5000/api/myfav 
+## Get all favorite by user
+if(userId) {
+    https://localhost:5000/api/1
+}else{}
+
+##  
