@@ -3,16 +3,61 @@
 //! importing database connection file
 const pool = require("../../config/database")
 //! Queries coming from the  query file
-const query = require("../services/queries")
+const queries = require("../services/queries")
 
 const getUser =  (req,res) => {
     // res.send("Sending the student details")
-    pool.query(query.getStudents, (error, results) => {
+    pool.query(queries.getUserQ, (error, results) => {
         if(error) throw error;
         res.status(200).json(results.rows) 
     })
 }
 
+const getUserById = (req,res) =>{
+    const id = parseInt(req.params.id)
+    pool.query(queries.getUserByIdQ,[id], (error, results) => {
+        if(error) throw error;
+        res.status(200).json(results.rows);
+    })
+}
+
+const addUser = (req,res) => {
+    const {username, password} = req.body;
+    // check user exists
+    pool.query(queries.checkUserExistsQ, [username] ,(error, results) => {
+        if(results.rows.length){
+            return res.send("Username Already Exists");
+        }
+        // Add user
+        pool.query(queries.addUserQ, [username, password], (error, results) => {
+            if(error) throw error;
+            res.status(201).send("User Registration Successfully!")
+        })
+    })
+} 
+
+//! Delete user by ID
+const deleteUserById = (req,res) => {
+    const id = parseInt(req.params.id);
+    //! check whether the user is present in the database or not
+    pool.query(queries.checkUserExistsQ,[id], (error, results) => {
+        const noUser = results.rows.length;
+        console.log(noUser)
+        if(noUser){
+            return res.send("User cannot found!");
+        }
+        //! if user found
+        pool.query(queries.deleteUserByIdQ, [id], (error, results) => {
+            if(error) throw error;
+            res.status(200).send("User Deleted Successfully!")
+        })
+    })
+    
+}
+
 module.exports =  {
-    getUser
+    getUser,
+    getUserById,
+    addUser,
+    deleteUserById
 };
