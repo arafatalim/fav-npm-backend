@@ -40,9 +40,9 @@ const addUser = (req,res) => {
 const deleteUserById = (req,res) => {
     const id = parseInt(req.params.id);
     //! check whether the user is present in the database or not
-    pool.query(queries.checkUserExistsQ,[id], (error, results) => {
-        const noUser = results.rows.length;
-        console.log(noUser)
+    pool.query(queries.checkUserExistsByIdQ,[id], (error, results) => {
+        const noUser = !results.rows.length;
+        // console.log(noUser)
         if(noUser){
             return res.send("User cannot found!");
         }
