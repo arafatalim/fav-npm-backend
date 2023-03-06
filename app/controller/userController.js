@@ -55,9 +55,27 @@ const deleteUserById = (req,res) => {
     
 }
 
+///! update the table
+const updateUser = (req,res) => {
+    const id= parseInt(req.params.id);
+    const {username} = req.body;
+    //! check user exists
+    pool.query(queries.checkUserExistsByIdQ, [id], (error, results) => {
+        if(!results.rows.length){
+            return res.send("User cannot find")
+        }
+        //! user exists
+        pool.query(queries.updateUserQ, [username, id],(error, results) => {
+            if(error) throw error;
+            res.status(200).send("User Updated Successfully");
+        })
+    })
+}
+
 module.exports =  {
     getUser,
     getUserById,
     addUser,
-    deleteUserById
+    deleteUserById,
+    updateUser
 };

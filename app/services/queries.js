@@ -3,7 +3,8 @@ const getUserByIdQ = `SELECT * from users WHERE id=$1`;
 const checkUserExistsQ = "SELECT * from users where users.username = $1";
 const addUserQ = "INSERT INTO users (username, password) VALUES ($1, $2)";
 const deleteUserByIdQ = "DELETE from users WHERE id=$1";
-const checkUserExistsByIdQ = "SELECT * from users WHERE users.id = $1"
+const checkUserExistsByIdQ = "SELECT * from users WHERE users.id = $1";
+const updateUserQ = "UPDATE users SET username = $1 WHERE id = $2;"
 
 module.exports = {
     getUserQ,
@@ -11,5 +12,6 @@ module.exports = {
     checkUserExistsQ,
     addUserQ,
     checkUserExistsByIdQ,
-    deleteUserByIdQ
+    deleteUserByIdQ,
+    updateUserQ
 }
