@@ -1,4 +1,4 @@
-const db = require("../models");
+const db = require("../models/index");
 
 // Model
 const NpmStore = db.npmStores;
@@ -7,8 +7,8 @@ const NpmStore = db.npmStores;
 
 //! add package
 const addPackage = async (req,res) => {
-    const {favourites, comments} = req.body;
     try{
+        const {favourites, comments} = req.body;
         const info = {
             favourites,
             comments
