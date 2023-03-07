@@ -49,6 +49,8 @@ router.put("/users/:id", userController.updateUser);
 //! Delete user by id
 router.delete("/users/:id", userController.deleteUser);
 
+//! One to many routes
+router.get("/getFavPackages", userController.getFavPackages)
 
 // //! favourite Router and controller
 // //! Add Favourite
