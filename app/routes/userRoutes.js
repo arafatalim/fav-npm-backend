@@ -25,10 +25,16 @@
 
 
 //! New Starts
+// import controller 
 const userController = require("../controller/userController.js")
+const npmStoreController = require("../controller/npmStoreController.js")
+
+//! router
 const router = require("express").Router();
 
-//! login - add user
+//! use Router 
+
+//! Registration - add user
 router.post("/register", userController.addUser);
 
 //! get all user 
@@ -42,6 +48,14 @@ router.put("/users/:id", userController.updateUser);
 
 //! Delete user by id
 router.delete("/users/:id", userController.deleteUser);
+
+
+// //! favourite Router and controller
+// //! Add Favourite
+// router.post("/addfav", npmStoreController.addPackage);
+
+// //! Get all favourite
+// router.get("/getAllFav", npmStoreController.getPackage)
 
 
 module.exports = router;

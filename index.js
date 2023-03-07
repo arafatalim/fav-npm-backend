@@ -20,7 +20,10 @@ app.use(cors(corsOrigin));
 
 //! Routers
 const userRouting = require("./app/routes/userRoutes.js");
-app.use("/api", userRouting);
+const packageRouting = require("./app/routes/npmStoreRoutes.js")
+
+app.use("/member", userRouting);
+app.use("/pack", packageRouting)
 
 const port =  process.env.PORT || 3000;
 app.use(express.json());
