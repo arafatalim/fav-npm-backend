@@ -28,9 +28,9 @@ app.use("/pack", packageRouting)
 const port =  process.env.PORT || 3000;
 app.use(express.json());
 
-//! Routers
-const userRouter = require("./app/routes/userRoutes.js");
-app.use("/api", userRouter);
+// //! Routers
+// const userRouter = require("./app/routes/userRoutes.js");
+// app.use("/api", userRouter);
 
 //! get request
 app.get("/", (req,res) =>{
