@@ -162,10 +162,27 @@ const updateUser = async (req,res) => {
     }
 }
 
+//! one to many relation users and npmStores
+const getFavPackages = async (req,res) => {
+    try{
+        const data = await User.findAll({
+            include: [{
+                model: NpmStore,
+                as: "npmStore"
+            }],
+            where: {id: 1}
+        })
+    }catch(err){
+        res.status(401).json({message: err.message})
+    }
+} 
+
+
 module.exports = {
     addUser,
     getAllUser,
     updateUser,
     deleteUser,
-    getUserById
+    getUserById,
+    getFavPackages
 }
