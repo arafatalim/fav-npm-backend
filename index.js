@@ -35,7 +35,7 @@ app.use("/api", userRouter);
 //! get request
 app.get("/", (req,res) =>{
     console.log("Hello Bhaiya")
-    res.json("Welcome home")
+    res.send("Welcome home")
 })
 
 // app.use("/api", userRouting)

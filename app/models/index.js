@@ -39,6 +39,17 @@ db.sequelize.sync({force: false})
 .catch((err) => console.log("Failed to Sync Data" + err))
 
 
+//! One to Many Relation
+db.users.hasMany(db.npmStores, {
+    foreignKey: 'user_id',
+    as: "npmStore"
+})
+
+db.npmStores.belongsTo(db.users, {
+    foreignKey: 'user_id',
+    as: "user"
+})
+
 module.exports = db;
 
 
