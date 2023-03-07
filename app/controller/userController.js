@@ -132,7 +132,7 @@ const getAllUser = async (req,res) => {
 const getUserById = async (req,res) => {
     try{
         let id = req.params.id;
-        let user = await User.findOne({ where: {id: id}});
+        let user = await User.findOne({attributes: ['id','username','createdAt', 'updatedAt'], where: {id: id}});
         res.status(200).send(user);
     }catch(err){
         res.status(401).json({message: err.message})
