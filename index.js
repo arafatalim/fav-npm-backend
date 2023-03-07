@@ -3,21 +3,24 @@ const express = require("express");
 const cors = require("cors")
 
 const bodyParser = require("body-parser")
-const userRouting = require("./app/routes/userRoutes")
+// const userRouting = require("./app/routes/userRoutes")
 
 const app = express();
 
 const corsOrigin = {
-    origin : "https://localhost:8000"
+    origin : "http://localhost:8000"
 }
 
-//! Routers
-const userRouter = require("./app/routes/userRoutes.js");
-app.use("/api", userRouter);
 
 //! set up middlewares
-app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 app.use(cors(corsOrigin));
+
+//! Routers
+const userRouting = require("./app/routes/userRoutes.js");
+app.use("/api", userRouting);
 
 const port =  process.env.PORT || 3000;
 app.use(express.json());

@@ -1,6 +1,6 @@
 
 module.exports = (sequelize, DataTypes) => {
-    const NpmStore = sequelize.define("NpmStore", {
+    const NpmStore = sequelize.define("npmStore", {
       favourites :{
         type: DataTypes.STRING,
         allowNull : false

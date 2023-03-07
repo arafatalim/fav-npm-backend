@@ -35,13 +35,13 @@ router.post("/register", userController.addUser);
 router.get("/users", userController.getAllUser);
 
 //! Login -  get user by ID 
-router.get("users/:id", userController.getUserById);
+router.get("/users/:id", userController.getUserById);
 
 //! update user
-router.put("users/:id", userController.updateUser);
+router.put("/users/:id", userController.updateUser);
 
 //! Delete user by id
-router.delete("users/:id", userController.deleteUser);
+router.delete("/users/:id", userController.deleteUser);
 
 
 module.exports = router;

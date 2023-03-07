@@ -81,6 +81,7 @@
 // };
 
 //! starting from here
+const bcrypt = require('bcrypt')
 
 const db = require("../models/index");
 
@@ -89,48 +90,76 @@ const NpmStore = db.npmStores;
 
 //! Main Work
 
-//! Create User
+//! Registration Create User
 const addUser = async (req,res) => {
+   try{
+    const {username, password} = req.body;
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(password, 10);
     let info = {
-        username: req.body.username,
-        password: req.body.password
+        username,
+        password: hashedPassword
     }
-
     const user = await User.create(info);
-    res.status(200).send("Login Successfully", user)
+    res.status(200).send(user)
+    console.log("Registration Successfully");
+
+   }catch(err){
+        res.status(401).json({message: err.message})
+        console.log("Already Exists")
+   }
+
 }
 
 //! Get all user
 const getAllUser = async (req,res) => {
-    let users = await User.findAll({
-        attribute:[
-            'username'
-        ]
-    })
-    res.status(200).send(users);
+    try{
+        let users = await User.findAll({
+            attributes:[
+                'id',
+                'username',
+                'createdAt',
+                'updatedAt'
+            ]
+        })
+        res.status(200).send(users);
+    }catch(err){
+        res.status(400).json({message: err.message})
+    }
 }
 
 //! get single User
 const getUserById = async (req,res) => {
-    let id = parseInt(req.params.id);
-
-    let user = await User.findOne({ where: {id: id}});
-    res.status(200).send(user);
+    try{
+        let id = req.params.id;
+        let user = await User.findOne({ where: {id: id}});
+        res.status(200).send(user);
+    }catch(err){
+        res.status(401).json({message: err.message})
+    }
 }
 
 //! Delete User by id
 const deleteUser = async (req, res) => {
-    let id = parseInt(req.params.id)
+   try{
+    let id = req.params.id
     await User.destroy({where: {id: id}})
     res.status(200).send("Delete Successfully!")
+   }catch(err){
+    res.status(401).json({message: err.message})
+   }
 }
 
 
 //! Update User 
 const updateUser = async (req,res) => {
-    let id = parseInt(req.params.id);
-    let update = await User.update(req.body, {where: {id: id}});
-    res.status(200).send("Updated Successfully" + update)
+    try{
+        let id = req.params.id;
+        let update = await User.update(req.body, {where: {id: id}});
+        res.status(200).send("Updated Successfully" + update)
+    }catch(err){
+        res.status(401).json({message: err.message})
+    }
 }
 
 module.exports = {
