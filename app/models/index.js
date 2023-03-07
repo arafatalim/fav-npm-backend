@@ -11,7 +11,7 @@ const sequelize = new Sequelize(
         operatorsAliases: false,
         
         pool: {
-            min:  dbConfig.pool.mini,
+            min:  dbConfig.pool.min,
             max: dbConfig.pool.max,
             acquire: dbConfig.pool.acquire,
             idle: dbConfig.pool.idle
