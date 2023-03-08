@@ -9,7 +9,9 @@ const NpmStore = db.npmStores;
 const addPackage = async (req,res) => {
     try{
         const {favourites, comments} = req.body;
+        const id = req.params.id;
         const info = {
+            user_id: id,
             favourites,
             comments
         }

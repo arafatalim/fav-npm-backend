@@ -163,15 +163,31 @@ const updateUser = async (req,res) => {
 }
 
 //! one to many relation users and npmStores
+// const getFavPackages = async (req,res) => {
+//     try{
+//         const data = await User.findAll({
+//             include: [{
+//                 model: NpmStore,
+//                 as: "npmStore"
+//             }],
+//             where: {id: 1}
+//         })
+//     }catch(err){
+//         res.status(401).json({message: err.message})
+//     }
+// } 
+//! one to many relation users and npmStores
 const getFavPackages = async (req,res) => {
     try{
-        const data = await User.findAll({
+        const id = req.params.id;
+        const data = await User.findOne({
             include: [{
                 model: NpmStore,
-                as: "npmStore"
+                as: 'npmStore'
             }],
-            where: {id: 1}
+            where: {id: id}
         })
+        res.status(200).json(data);
     }catch(err){
         res.status(401).json({message: err.message})
     }

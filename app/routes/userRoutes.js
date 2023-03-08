@@ -1,7 +1,6 @@
 // const {Router} = require("express");
 // const controller = require("../controller/userController")
 
-
 // const router = Router();
 
 // //! get all the students
@@ -27,7 +26,7 @@
 //! New Starts
 // import controller 
 const userController = require("../controller/userController.js")
-const npmStoreController = require("../controller/npmStoreController.js")
+// const npmStoreController = require("../controller/npmStoreController.js")
 
 //! router
 const router = require("express").Router();
@@ -50,7 +49,7 @@ router.put("/users/:id", userController.updateUser);
 router.delete("/users/:id", userController.deleteUser);
 
 //! One to many routes
-router.get("/getFavPackages", userController.getFavPackages)
+router.get("/getFavPackages/:id", userController.getFavPackages)
 
 // //! favourite Router and controller
 // //! Add Favourite

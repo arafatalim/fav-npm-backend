@@ -4,9 +4,9 @@ const npmStoreController = require("../controller/npmStoreController.js");
 // Router
 const router = require("express").Router();
 
-// use Router
+// use Router - localhost:3000/pack
 //! Adding npm package 
-router.post("/addPackage", npmStoreController.addPackage);
+router.post("/addPackage/:id", npmStoreController.addPackage);
 
 //! Get all packages
 router.get("/allPackage", npmStoreController.getPackage)
