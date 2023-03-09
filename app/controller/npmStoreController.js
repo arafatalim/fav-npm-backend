@@ -13,15 +13,15 @@ const addPackage = async (req,res) => {
         favourites: {
             presence: true,
             length: {
-                min: 3,
-                message: "Username must be 3 characters long!"
+                min: 1,
+                message: "Favorite must be 2 Character long"
             }
         },
         comments: {
             presence: true,
             length: {
                 min: 6,
-                message: "Password must be 6 Characters long!"
+                message: "Comments must be 6 Characters long!"
             }
         }
     }
@@ -61,7 +61,7 @@ const deletePackage = async (req, res) => {
         const id = req.params.id;
         const findPack = await NpmStore.findByPk(id);
         const data = findPack.destroy();
-        res.staus(201).send("Package Removed!")
+        res.status(201).send("Package Removed!")
     }catch(err){
         res.status(400).json({message: err.message})
     }
@@ -70,25 +70,32 @@ const deletePackage = async (req, res) => {
 //! Update the package comments
 const updateComments = async (req,res) => {
     const {comments} = req.body;
+    const id = req.params.id;
     const constraints = {
-        comments : {
-            presence:  true,
+        comments: {
+            presence: true,
             length: {
-                min: 0,
-                message : "Length must be 3 characters long!"
+                min: 3,
+                message: "Comments must be 3 Characters long!"
             }
         }
     }
+    const invalid = validate({comments}, constraints)
+    
     try{
-        const id = req.params.id;
-        const findPack = await NpmStore.findByPk(id);
-        const data = findPack.update({
-            comments
-        })
-        res.status(200).send("Updated Successfully!")
-        
+        if(invalid){
+            return res.status(400).json(invalid);
+        }else{
+            const findPack = await NpmStore.findByPk(id);
+            const data = findPack.update({
+                comments
+            })
+            
+           return res.status(200).send("Updated Successfully!")
+        }
+                
     }catch(err){
-        res.staus(400).json({message: err.message})
+        res.status(400).json({message: err.message})
     }
 }
 
