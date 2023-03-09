@@ -226,5 +226,5 @@ module.exports = {
     updateUser,
     deleteUser,
     getUserById,
-    getFavPackages
+    getFavPackages,
 }

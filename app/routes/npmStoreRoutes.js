@@ -8,6 +8,8 @@ const router = require("express").Router();
 //! Adding npm package 
 router.post("/addPackage/:id", npmStoreController.addPackage);
 
+router.delete("/deletePackage/:id", npmStoreController.deletePackage)
+
 //! Get all packages
 router.get("/allPackage", npmStoreController.getPackage)
 

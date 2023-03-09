@@ -1,3 +1,4 @@
+const { validate } = require("validate.js");
 const db = require("../models/index");
 
 // Model
@@ -7,17 +8,38 @@ const NpmStore = db.npmStores;
 
 //! add package
 const addPackage = async (req,res) => {
-    try{
-        const {favourites, comments} = req.body;
-        const id = req.params.id;
-        const info = {
-            user_id: id,
-            favourites,
-            comments
+    const {favourites, comments} = req.body;
+    const constraints = {
+        favourites: {
+            presence: true,
+            length: {
+                min: 3,
+                message: "Username must be 3 characters long!"
+            }
+        },
+        comments: {
+            presence: true,
+            length: {
+                min: 6,
+                message: "Password must be 6 Characters long!"
+            }
         }
-        const data = await NpmStore.create(info);
-        res.status(200).send(data);
-        console.log("Package Added successfully");
+    }
+    const invalid = validate({favourites, comments}, constraints)
+    try{
+        if(invalid){
+            return res.status(400).json(invalid);
+        }else{
+            const id = req.params.id;
+            const info = {
+                user_id: id,
+                favourites,
+                comments
+            }
+            const data = await NpmStore.create(info);
+            res.status(200).send(data);
+            console.log("Package Added successfully");
+        }
     }catch(err){
         res.status(401).json({message: err.message});
     }
@@ -33,7 +55,22 @@ const getPackage = async (req,res) => {
  } 
 }
 
+//! delete package using by package's id
+const deletePackage = async (req, res) => {
+    try{
+        const id = req.params.id;
+        const findPack = await NpmStore.findByPk(id);
+        const data = findPack.destroy();
+        res.staus(201).send("Package Removed!")
+    }catch(err){
+        res.status(401).json({message: err.message})
+    }
+}
+
+
+
 module.exports = {
     getPackage,
-    addPackage
+    addPackage,
+    deletePackage
 }
