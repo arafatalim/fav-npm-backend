@@ -26,7 +26,6 @@ module.exports = {
     PASSWORD : process.env.PASSWORD,
     DB : process.env.DB,
     dialect: process.env.DIALECT,
-    operatorsAliases: 0, // change this to zero
 
     pool : {
         min:0,
