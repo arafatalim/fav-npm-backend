@@ -62,32 +62,36 @@
 
 # Api creation
 ##  Login 
-    - https://localhost:3000/member/login
+    GET https://localhost:3000/member/login
 
 ##  Register
-    - https://localhost:3000/member/register
+    POST https://localhost:3000/member/register
 
 ## Fetch User's Package
-    - https://localhost:3000/member/getFavPackages/:id
+    GET https://localhost:3000/member/getFavPackages/:id
     id = Users's ID
 
 ## Adding Package
-    - https://localhost:3000/pack/addPackage/:id
+    POST https://localhost:3000/pack/addPackage/:id
     id = User's ID
 
 ## Updating the User's Package 
-    - https://localhost:3000/pack/updatePackage/:id
+    PUT https://localhost:3000/pack/updatePackage/:id
      id = Selected Package ID
 
 ## Deleting the User's Package
-    - https://localhost:3000/pack/deletePackage/:id
+    DELETE https://localhost:3000/pack/deletePackage/:id
      id = Selected Package ID
-
-# Admin Role
+ 
+# Admin Role - (Beta Task)
 ## Retreiving All Users 
-    - https://localhost:3000/member/users
+    GET https://localhost:3000/member/users
 
-## Searching Admin for any users.
-    - https://localhost:3000/member/users/id
+## Admin can search any User by iD.
+    GET https://localhost:3000/member/users/id
      id = User's ID 
+## Admin can search by using Username
+    
+    GET - https://localhost:3000/member/users/
+    const username = req.body.username
 
