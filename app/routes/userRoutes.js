@@ -39,8 +39,8 @@ router.post("/register", userController.addUser);
 //! get all user 
 router.get("/users", userController.getAllUser);
 
-//! Login -  get user by ID 
-router.get("/users/:id", userController.getUserById);
+//! Login -  get user by username
+router.get("/login", userController.getUserByUsername);
 
 //! update user
 router.put("/users/:id", userController.updateUser);
