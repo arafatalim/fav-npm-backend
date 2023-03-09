@@ -1,4 +1,4 @@
-# fav-npm-backend
+# Implement Backend System for npm_favourite_package
 
 # login system
 - Login 
@@ -14,12 +14,12 @@
 ## Creating users table for storing user password and username
 
     - id (serial) PK // auto_incr
-    - name varchar(30) NOT NULL // sole identifier
+    - username varchar(30) NOT NULL // sole identifier
     - password int NOT NULL 
 
 ## Creating npmStore for storing the user's data 
     - id (serial) PK //auto_incr
-    - uid INT NOT NULL
+    - user_id INT NOT NULL
     - fav_package (varchar50) NOT NULL
     - comments (varchar100) NOT NULL
 
@@ -27,21 +27,11 @@
  - sequelize
  - pg
  - pg-hstore
- - postgresql
- - expressJS
- - bcrypt
-
-
-
-## saving the user id in the local storage when user saving into the database
-`localStorage.setItem("key", value)`
-
-## checking the user od is present in local storage or not (authenticating the user)
-`if(localStorage.getItem("key", value)){}`
-`else{error}`
-
-## When the user click on signout button then remove the user id from the localstorage
-`localStorage.removeItem("key");`
+ - postgresql (Database)
+ - NodeJS
+ - expressJS 
+ - bcrypt (it is used for encryption)
+ - validatejs (it is used for validate the fields)
 
 ## When user want to login then search the user's name from the database 
  - if found then save the user's name and id into the localstorage 
@@ -60,17 +50,56 @@
 
 `SELECT * from user where id="1";`
 
+# Validation using "validatejs"
+## Environment Setup
+- Installation - `npm install --save validatejs`
+- Require - `const validate = require("validate.js")`
+- Usage 
+    - Create a constraints - Validating the username and password on Registration page
+        ```const constraints = {
+            username: {
+                presence: true,
+                length: {
+                    minimum : 3,
+                    message : "must be 3 Characters Long!" 
+                }
+            },
+            password: {
+                presence: true,
+                length:{
+                    minimum: 3,
+                    message : "must be 3 Characters Long!"
+                }
+            }
+        }```
+    - Call the validate function to validate the given fields
+        `const invalid = validate({username, password}, constraints)`
+        - If all the fields are correct, it will show the `undefined`
+
+
 # Api creation
-## API Login
-    - https://localhost:5000/login
+##  Login 
+    - https://localhost:3000/member/login
 
-## API Register
-    - https://localhost:5000/register
+##  Register
+    - https://localhost:3000/member/register
 
-## API 
+## Fetch User's Package
+    - https://localhost:3000/member/getFavPackages/:id
+    id = Users's ID
 
-## Get all favorite by user
-`if(userId) {`
-    `https://localhost:5000/npm/1`
-`}else{}`
+## Adding Package
+    - https://localhost:3000/pack/addPackage/:id
+    id = User's ID
+
+## Updating the User's Package 
+    - https://localhost:3000/pack/updatePackage/:id
+    - id = Selected Package ID
+
+## Deleting the User's Package
+    - https://localhost:3000/pack/deletePackage/:id
+    - id = Selected Package ID
+
+## Retreiving All Users - (Admin Role)
+    - https://localhost:3000/member/users
 
