@@ -13,15 +13,15 @@ const addPackage = async (req,res) => {
         favourites: {
             presence: true,
             length: {
-                min: 1,
-                message: "Favorite must be 2 Character long"
+                minimum: 1,
+                message: "must be 2 Character long"
             }
         },
         comments: {
             presence: true,
             length: {
-                min: 6,
-                message: "Comments must be 6 Characters long!"
+                minimum: 6,
+                message: "must be 6 Characters long!"
             }
         }
     }
@@ -75,8 +75,8 @@ const updateComments = async (req,res) => {
         comments: {
             presence: true,
             length: {
-                min: 3,
-                message: "Comments must be 3 Characters long!"
+                minimum: 3,
+                message: "must be 3 Characters long!"
             }
         }
     }

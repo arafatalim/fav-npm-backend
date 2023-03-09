@@ -9,7 +9,7 @@ const router = require("express").Router();
 router.post("/addPackage/:id", npmStoreController.addPackage);
 //! Deleting the package
 router.delete("/deletePackage/:id", npmStoreController.deletePackage)
-//! Update the package 
+//! Update the package using package id 
 router.put("/updatePackage/:id", npmStoreController.updateComments)
 
 //! Get all packages
