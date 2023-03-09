@@ -49,6 +49,7 @@ router.put("/users/:id", userController.updateUser);
 router.delete("/users/:id", userController.deleteUser);
 
 //! One to many routes
+//! Get Fav package by using user's ID 
 router.get("/getFavPackages/:id", userController.getFavPackages)
 
 
