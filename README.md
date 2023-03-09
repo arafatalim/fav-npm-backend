@@ -1,29 +1,7 @@
 # Exercise 1: Implement Backend for Favorite NPM packages
 
-# login system
-- Login 
-    - User enter details - Username and password
-        - if user's name is match with existing database then return the user to user's homepage. 
-        - if user's name is not present in the database then return the user an error message. No such user exixts.
-- Sign Up
-    - User enter details - Username and password and hit Signup
-        - check if user's name is present in the data then return an error message, user already exists.
-        - Otherwise saved the data into the database and save the user's id and name into the localStorage and move the user to their homepage.
-
-
-## Creating users table for storing user password and username
-
-    - id (serial) PK // auto_incr
-    - username varchar(30) NOT NULL // sole identifier
-    - password int NOT NULL 
-
-## Creating npmStore for storing the user's data 
-    - id (serial) PK //auto_incr
-    - user_id INT NOT NULL
-    - fav_package (varchar50) NOT NULL
-    - comments (varchar100) NOT NULL
-
-## Prerequistic
+## Pre-Requisite
+ ### Packages Requirement
  - sequelize
  - pg
  - pg-hstore
@@ -33,22 +11,27 @@
  - bcrypt (it is used for encryption)
  - validatejs (it is used for validate the fields)
 
-## When user want to login then search the user's name from the database 
- - if found then save the user's name and id into the localstorage 
-    - `select name from user where name="joe"` 
- - If not found ask user to fill the form, say new user.
+# login system
+- Login 
+    - User enter details - Username and Password
+        - if user's name is match with existing database then return the user to user's Homepage/Dashboard. 
+        - if user's name is not present in the database then return the user an error message. No such user exixts.
+- Sign Up
+    - User enter details - Username and Password
+        - Check if user's name is present in the data then return an error message, user already exists.
+        - Otherwise saved the data into the database and save the user's id and name into the localStorage and move the user to their homepage.
 
-## if user found then go user's data and display the data
-`select * from user where id="1";`
+## Creating users table for storing user password and username
 
+    - id (serial) PK // auto_incr
+    - username varchar(30) NOT NULL // sole identifier
+    - password int NOT NULL 
 
-## Inserting data into the user table
-
-`INSERT into users(name, fav_package, comments) VALUES('Joe', "react", 'What is the butterfly effect?');`
-
-## Retrieving All Data by name
-
-`SELECT * from user where id="1";`
+## Creating npmStore for storing the user's data 
+    - id (serial) PK //auto_incr
+    - user_id INT NOT NULL (FK)
+    - fav_package (varchar50) NOT NULL
+    - comments (varchar100) NOT NULL
 
 # Validation using "validatejs"
 ## Environment Setup
@@ -71,10 +54,10 @@
                     message : "must be 3 Characters Long!"
                 }
             }
-        }```
+        }
     - Call the validate function to validate the given fields
         `const invalid = validate({username, password}, constraints)`
-        - If all the fields are correct, it will show the `undefined`
+        - If all the fields are correct, it will show the value of `invalid (variable)`is `undefined`
 
 
 # Api creation
@@ -94,12 +77,17 @@
 
 ## Updating the User's Package 
     - https://localhost:3000/pack/updatePackage/:id
-    - id = Selected Package ID
+     id = Selected Package ID
 
 ## Deleting the User's Package
     - https://localhost:3000/pack/deletePackage/:id
-    - id = Selected Package ID
+     id = Selected Package ID
 
-## Retreiving All Users - (Admin Role)
+# Admin Role
+## Retreiving All Users 
     - https://localhost:3000/member/users
+
+## Searching Admin for any users.
+    - https://localhost:3000/member/users/id
+     id = User's ID 
 
