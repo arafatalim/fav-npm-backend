@@ -1,4 +1,4 @@
-# Implement Backend System for npm_favourite_package
+# Exercise 1: Implement Backend for Favorite NPM packages
 
 # login system
 - Login 
