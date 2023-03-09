@@ -154,12 +154,20 @@ const getAllUser = async (req,res) => {
     }
 }
 
-//! get single User
-const getUserById = async (req,res) => {
+//! get single User by username - member/login
+const getUserByUsername = async (req,res) => {
     try{
-        let id = req.params.id;
-        let user = await User.findOne({attributes: ['id','username','createdAt', 'updatedAt'], where: {id: id}});
-        res.status(200).send(user);
+        // let id = req.params.id;
+        const username = req.body.username;
+        let user = await User.findOne({attributes: ['id','username','createdAt', 'updatedAt'], where: {"username": username}});
+        console.log("username - ",username)
+        console.log("user - ",user)
+        if(!user){
+            res.status(400).send("No User Found!, Please register!")
+        } else{
+            res.status(200).send(user);
+        }
+        
     }catch(err){
         res.status(401).json({message: err.message})
     }
@@ -225,6 +233,6 @@ module.exports = {
     getAllUser,
     updateUser,
     deleteUser,
-    getUserById,
+    getUserByUsername,
     getFavPackages,
 }
