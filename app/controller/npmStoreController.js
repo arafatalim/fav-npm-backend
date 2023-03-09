@@ -63,14 +63,38 @@ const deletePackage = async (req, res) => {
         const data = findPack.destroy();
         res.staus(201).send("Package Removed!")
     }catch(err){
-        res.status(401).json({message: err.message})
+        res.status(400).json({message: err.message})
     }
 }
 
-
+//! Update the package comments
+const updateComments = async (req,res) => {
+    const {comments} = req.body;
+    const constraints = {
+        comments : {
+            presence:  true,
+            length: {
+                min: 0,
+                message : "Length must be 3 characters long!"
+            }
+        }
+    }
+    try{
+        const id = req.params.id;
+        const findPack = await NpmStore.findByPk(id);
+        const data = findPack.update({
+            comments
+        })
+        res.status(200).send("Updated Successfully!")
+        
+    }catch(err){
+        res.staus(400).json({message: err.message})
+    }
+}
 
 module.exports = {
     getPackage,
     addPackage,
-    deletePackage
+    deletePackage,
+    updateComments
 }
