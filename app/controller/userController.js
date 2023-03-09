@@ -82,28 +82,54 @@
 
 //! starting from here
 const bcrypt = require('bcrypt')
+const validate = require("validate.js");
+
 
 const db = require("../models/index");
 
 const User = db.users;
 const NpmStore = db.npmStores;
 
+
+
 //! Main Work
 
 //! Registration Create User
 const addUser = async (req,res) => {
-   try{
     const {username, password} = req.body;
+    //! creating a constraint 
+    const constraints = {
+        username: {
+            presence: true,
+            length: {
+                minimum: 3,
+                message: "must be at least 3 characters"
+            }
+          },
+        password: {
+            presence: true,
+            length: {
+                minimum: 6,
+                message: "must be at least 6 characters"
+            }
+        }
+    }
+    const invalid = validate({username, password}, constraints)
+   try{
+        if(invalid){
+        return res.status(400).json(invalid)
+    }else{
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
     let info = {
         username,
         password: hashedPassword
     }
-    const user = await User.create(info);
-    res.status(200).send(user)
-    console.log("Registration Successfully");
-
+    console.log(info.username)
+        const user = await User.create(info);
+        res.status(200).send(user)
+        console.log("Registration Successfully");
+    }
    }catch(err){
         res.status(401).json({message: err.message})
         console.log("Already Exists")
