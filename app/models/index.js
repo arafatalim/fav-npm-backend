@@ -2,23 +2,25 @@ const dbConfig = require("../../config/database");
 
 const {Sequelize, DataTypes} = require("sequelize");
 
-const sequelize = new Sequelize(
-    dbConfig.DB,
-    dbConfig.USER,
-    dbConfig.PASSWORD, {
-        host: dbConfig.HOST,
-        dialect: dbConfig.dialect,
-        // operatorsAliases: false,
-        operatorsAliases: 0, // change this to zero
+const sequelize = new Sequelize("postgres://root:LCV5PkEYRvAAupMPlhVpi0KVfVzioJxE@dpg-cg4ra6g2qv287cqs1440-a.singapore-postgres.render.com/fav_npm?ssl=true")
+
+// const sequelize = new Sequelize(
+//     dbConfig.DB,
+//     dbConfig.USER,
+//     dbConfig.PASSWORD, {
+//         host: dbConfig.HOST,
+//         dialect: dbConfig.dialect,
+//         // operatorsAliases: false,
+//         operatorsAliases: 0, // change this to zero
         
-        pool: {
-            min:  dbConfig.pool.min,
-            max: dbConfig.pool.max,
-            acquire: dbConfig.pool.acquire,
-            idle: dbConfig.pool.idle
-        }
-    }
-)
+//         pool: {
+//             min:  dbConfig.pool.min,
+//             max: dbConfig.pool.max,
+//             acquire: dbConfig.pool.acquire,
+//             idle: dbConfig.pool.idle
+//         }
+//     }
+// )
 
 // authenticate 
 sequelize.authenticate()
@@ -35,7 +37,7 @@ db.users = require("./userModel.js")(sequelize, DataTypes);
 db.npmStores = require("./npmModel.js")(sequelize, DataTypes);
 
 //Restrict the sequelize to reset the db
-db.sequelize.sync({force: false})
+db.sequelize.sync({alter: true})
 .then(() => console.log("Yes Re - sync done"))
 .catch((err) => console.log("Failed to Sync Data" + err))
 
