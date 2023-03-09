@@ -21,16 +21,18 @@
 // module.exports = pool
 
 module.exports = {
-    HOST: "localhost",
-    USER: "postgres",
-    PASSWORD : "secret",
-    DB : "fav_npm",
-    dialect: "postgres",
+    HOST: process.env.HOST,
+    USER: process.env.DB_USER,
+    PASSWORD : process.env.PASSWORD,
+    DB : process.env.DB,
+    dialect: process.env.DIALECT,
+    operatorsAliases: 0, // change this to zero
 
     pool : {
         min:0,
         max: 5,
         acquire: 30000,
         idle: 10000
+ 
     }
 }
