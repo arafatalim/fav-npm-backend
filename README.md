@@ -60,38 +60,39 @@
         - If all the fields are correct, it will show the value of `invalid (variable)`is `undefined`
 
 
-# Api creation
+# Api creation 
+### Replace the `http://localhost:3000/` with `https://fav-npm-backend-server.onrender.com/`
+
 ##  Login 
-    GET https://localhost:3000/member/login
+    GET http://localhost:3000/member/login
 
 ##  Register
-    POST https://localhost:3000/member/register
+    POST http://localhost:3000/member/register
 
 ## Fetch User's Package
-    GET https://localhost:3000/member/getFavPackages/:id
+    GET http://localhost:3000/member/getFavPackages/:id
     id = Users's ID
 
 ## Adding Package
-    POST https://localhost:3000/pack/addPackage/:id
+    POST http://localhost:3000/pack/addPackage/:id
     id = User's ID
 
 ## Updating the User's Package 
-    PUT https://localhost:3000/pack/updatePackage/:id
+    PUT http://localhost:3000/pack/updatePackage/:id
      id = Selected Package ID
 
 ## Deleting the User's Package
-    DELETE https://localhost:3000/pack/deletePackage/:id
+    DELETE http://localhost:3000/pack/deletePackage/:id
      id = Selected Package ID
  
 # Admin Role - (Beta Task)
 ## Retreiving All Users 
-    GET https://localhost:3000/member/users
+    GET http://localhost:3000/member/users
 
 ## Admin can search any User by iD.
-    GET https://localhost:3000/member/users/id
+    GET http://localhost:3000/member/users/id
      id = User's ID 
 ## Admin can search by using Username
-    
-    GET - https://localhost:3000/member/users/
+    GET - http://localhost:3000/member/users/
     const username = req.body.username
 
