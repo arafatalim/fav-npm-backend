@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
 const config = require("./config");
 
-const sequelize = new Sequelize("postgres://root:LCV5PkEYRvAAupMPlhVpi0KVfVzioJxE@dpg-cg4ra6g2qv287cqs1440-a/fav_npm?ssl=true")
+const sequelize = new Sequelize(process.env.CONNECTION_LINK)
 
 module.exports = sequelize; 
 

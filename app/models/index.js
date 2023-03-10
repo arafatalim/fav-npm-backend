@@ -2,7 +2,7 @@ const dbConfig = require("../../config/database");
 
 const {Sequelize, DataTypes} = require("sequelize");
 
-const sequelize = new Sequelize("postgres://root:LCV5PkEYRvAAupMPlhVpi0KVfVzioJxE@dpg-cg4ra6g2qv287cqs1440-a.singapore-postgres.render.com/fav_npm?ssl=true")
+const sequelize = new Sequelize(process.env.EXTERNAL_DB_LINK)
 
 // const sequelize = new Sequelize(
 //     dbConfig.DB,
